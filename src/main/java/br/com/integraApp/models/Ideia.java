@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.UniqueConstraint;
 
 import br.com.integraApp.models.Tema;
 import br.com.integraApp.models.Notificacao;
@@ -39,7 +41,9 @@ public class Ideia {
 	
 	/*private Notificacao notificacao; // notificação é uma class
 */	
-	@ManyToMany(mappedBy="ideia")							//define que a tabela
+	@ManyToMany
+	@JoinTable(name="ideia_usuario",uniqueConstraints={@UniqueConstraint(columnNames={"ideia_id", "usuario_id"})}, 
+	joinColumns=@JoinColumn(name="ideia_id", referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="usuario_id", referencedColumnName="id"))//define que a tabela
 	private List<Usuario> usuarios;
 	
 	@OneToMany(mappedBy="ideia")

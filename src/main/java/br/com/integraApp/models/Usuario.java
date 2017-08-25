@@ -8,8 +8,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 
 import br.com.integraApp.enums.Papel;
 
@@ -25,8 +27,7 @@ public class Usuario {
 	@Enumerated(EnumType.STRING)
 	private Papel papel;
 	
-	@ManyToMany
-	@JoinTable(name="ideia_usuario")//define que a tabela ideia guardara a chave estrangera
+	@ManyToMany(mappedBy="usuario")//define que a tabela ideia guardara a chave estrangera
 	private List<Ideia> ideias;
 	
 	/*private Mensagem mensagem;*/
