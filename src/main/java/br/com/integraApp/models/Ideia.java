@@ -1,17 +1,26 @@
 package br.com.integraApp.models;
 
+import java.io.File;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import br.com.integraApp.models.Tema;
+import br.com.integraApp.models.Notificacao;
+import br.com.integraApp.models.Snapshot;
 
 @Entity
 public class Ideia {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
 	private String proposta;
@@ -19,12 +28,26 @@ public class Ideia {
 	private String informacoes;
 	private String linkVideo;
 	private boolean estado;
+	private File arquivo;
+	private int numeroDeComentarios;
+	private int numeroDeCurtidas;
+	private int indiceDePopularidade;
+	
 	@ManyToOne
-	@JoinColumn(name="usuario_id")//define que a tabela
-	private Usuario usuario;
+	@JoinColumn(name="tema_id")
+	private Tema tema;
+	
+	/*private Notificacao notificacao; // notificação é uma class
+*/	
+	@ManyToMany(mappedBy="ideia")							//define que a tabela
+	private List<Usuario> usuarios;
+	
 	@OneToMany(mappedBy="ideia")
 	private List<Comentario> comentarios;
 	
+	@OneToMany
+	@JoinColumn(name="ideia_id")
+	private List<Snapshot> snapshots;
 
 	public Integer getId() {
 		return id;
@@ -33,16 +56,6 @@ public class Ideia {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 
@@ -105,11 +118,81 @@ public class Ideia {
 		this.estado = estado;
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
-		return "Ideia [id=" + id + ", usuario=" + usuario + ", titulo=" + titulo + ", proposta=" + proposta
+		return "Ideia [id=" + id + ", usuario=" + usuarios + ", titulo=" + titulo + ", proposta=" + proposta
 				+ ", beneficios=" + beneficios + ", informacoes=" + informacoes + ", linkVideo=" + linkVideo
 				+ ", estado=" + estado + "]";
+	}*/
+
+
+	public File getArquivo() {
+		return arquivo;
+	}
+
+
+	public void setArquivo(File arquivo) {
+		this.arquivo = arquivo;
+	}
+
+
+	public int getNumeroDeComentarios() {
+		return numeroDeComentarios;
+	}
+
+
+	public void setNumeroDeComentarios(int numeroDeComentarios) {
+		this.numeroDeComentarios = numeroDeComentarios;
+	}
+
+
+	public int getNumeroDeCurtidas() {
+		return numeroDeCurtidas;
+	}
+
+
+	public void setNumeroDeCurtidas(int numeroDeCurtidas) {
+		this.numeroDeCurtidas = numeroDeCurtidas;
+	}
+
+
+	public int getIndiceDePopularidade() {
+		return indiceDePopularidade;
+	}
+
+
+	public void setIndiceDePopularidade(int indiceDePopularidade) {
+		this.indiceDePopularidade = indiceDePopularidade;
+	}
+
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+
+	/*public Notificacao getNotificacao() {
+		return notificacao;
+	}
+
+
+	public void setNotificacao(Notificacao notificacao) {
+		this.notificacao = notificacao;
+	}*/
+
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	

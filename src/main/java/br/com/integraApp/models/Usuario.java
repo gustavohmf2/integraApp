@@ -8,7 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import br.com.integraApp.enums.Papel;
 
@@ -23,8 +24,12 @@ public class Usuario {
 	private String senha;
 	@Enumerated(EnumType.STRING)
 	private Papel papel;
-	@OneToMany(mappedBy="usuario")//define que a tabela ideia guardara a chave estrangera
+	
+	@ManyToMany
+	@JoinTable(name="ideia_usuario")//define que a tabela ideia guardara a chave estrangera
 	private List<Ideia> ideias;
+	
+	/*private Mensagem mensagem;*/
 	
 	public Integer getId() {
 		return id;
@@ -49,6 +54,18 @@ public class Usuario {
 	}
 	public void setPapel(Papel papel) {
 		this.papel = papel;
+	}
+	/*public Mensagem getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(Mensagem mensagem) {
+		this.mensagem = mensagem;
+	}*/
+	public List<Ideia> getIdeias() {
+		return ideias;
+	}
+	public void setIdeias(List<Ideia> ideias) {
+		this.ideias = ideias;
 	}
 	
 }
