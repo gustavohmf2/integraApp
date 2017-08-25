@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: integraApp
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: gustavo
+Implementation-Vendor-Id: br.com.integraApp
+Build-Jdk: 1.8.0_111
+Implementation-URL: http://persapiens.org/integraApp
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: JoinFaces
+
