@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,10 +16,9 @@ public class Mensagem {
 	private int destinatario; //ID DO USUARIO
 	private String texto;
 	
-	
-	
-	/*@ManyToOne
-	private Usuario usuario;*/  //duvida em relação ao relacionamento com mensagem/ email/ texto
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario; //duvida em relação ao relacionamento com mensagem/ email/ texto
 
 	
 	//Getters - Setters - HashCode - Equals - constructor

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
 
 import br.com.integraApp.enums.Papel;
@@ -27,10 +28,11 @@ public class Usuario {
 	@Enumerated(EnumType.STRING)
 	private Papel papel;
 	
-	@ManyToMany(mappedBy="usuario")//define que a tabela ideia guardara a chave estrangera
+	@ManyToMany(mappedBy="usuarios")//define que a tabela ideia guardara a chave estrangera
 	private List<Ideia> ideias;
 	
-	/*private Mensagem mensagem;*/
+	@OneToMany(mappedBy="usuario")
+	private List<Mensagem> mensagem;
 	
 	public Integer getId() {
 		return id;
@@ -68,5 +70,11 @@ public class Usuario {
 	public void setIdeias(List<Ideia> ideias) {
 		this.ideias = ideias;
 	}
-	
+	public List<Mensagem> getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(List<Mensagem> mensagem) {
+		this.mensagem = mensagem;
+	}
+
 }

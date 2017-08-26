@@ -42,8 +42,9 @@ public class Ideia {
 	/*private Notificacao notificacao; // notificação é uma class
 */	
 	@ManyToMany
-	@JoinTable(name="ideia_usuario",uniqueConstraints={@UniqueConstraint(columnNames={"ideia_id", "usuario_id"})}, 
-	joinColumns=@JoinColumn(name="ideia_id", referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="usuario_id", referencedColumnName="id"))//define que a tabela
+	@JoinTable(name="ideia_usuario",
+		joinColumns = @JoinColumn(name="ideia_id"),
+		inverseJoinColumns = @JoinColumn(name="usuario_id"))
 	private List<Usuario> usuarios;
 	
 	@OneToMany(mappedBy="ideia")
